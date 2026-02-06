@@ -1,0 +1,97 @@
+{
+  "agent_name": "Apollo Enrichment Agent",
+  "agent_id": "69864bfce6006e489659fdfe",
+  "agent_purpose": "assistant",
+  "description": "Enriches contact profiles by extracting name, company, title, seniority, industry, company size, and technologies used",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "enriched_contacts": [
+        {
+          "email": "string",
+          "name": "string",
+          "title": "string",
+          "seniority": "string",
+          "company": {
+            "name": "string",
+            "industry": "string",
+            "size": "string",
+            "funding_stage": "string",
+            "technologies": [
+              "string"
+            ]
+          }
+        }
+      ],
+      "total_enriched": "number",
+      "enrichment_rate": "string"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "enriched_contacts": [
+        {
+          "email": "john.doe@example.com",
+          "name": "John Doe",
+          "title": "Senior Software Engineer",
+          "seniority": "Senior",
+          "company": {
+            "name": "Tech Innovations Inc.",
+            "industry": "Information Technology",
+            "size": "201-500 employees",
+            "funding_stage": "Series B",
+            "technologies": [
+              "Python",
+              "JavaScript",
+              "AWS"
+            ]
+          }
+        }
+      ],
+      "total_enriched": 1,
+      "enrichment_rate": "100%"
+    },
+    "metadata": {
+      "agent_name": "Apollo Enrichment Agent",
+      "timestamp": "2023-10-14T15:03:00Z"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-02-06T20:22:44.003119",
+  "test_message_used": "Hello, provide a sample response",
+  "actual_test_response": {
+    "status": "success",
+    "result": {
+      "enriched_contacts": [
+        {
+          "email": "john.doe@example.com",
+          "name": "John Doe",
+          "title": "Senior Software Engineer",
+          "seniority": "Senior",
+          "company": {
+            "name": "Tech Innovations Inc.",
+            "industry": "Information Technology",
+            "size": "201-500 employees",
+            "funding_stage": "Series B",
+            "technologies": [
+              "Python",
+              "JavaScript",
+              "AWS"
+            ]
+          }
+        }
+      ],
+      "total_enriched": 1,
+      "enrichment_rate": "100%"
+    },
+    "metadata": {
+      "agent_name": "Apollo Enrichment Agent",
+      "timestamp": "2023-10-14T15:03:00Z"
+    }
+  }
+}

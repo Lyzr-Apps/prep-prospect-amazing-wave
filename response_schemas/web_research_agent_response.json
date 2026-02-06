@@ -1,0 +1,47 @@
+{
+  "agent_name": "Web Research Agent",
+  "agent_id": "69864c29f823535a6d0c1819",
+  "agent_purpose": "assistant",
+  "description": "Finds recent news articles and company announcements including funding news, product launches, and press releases",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "research_findings": [
+        "any"
+      ],
+      "total_news_items": "string"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string",
+      "research_period": "string"
+    }
+  },
+  "example_response": {
+    "status": "error",
+    "result": {
+      "research_findings": [],
+      "total_news_items": "0"
+    },
+    "metadata": {
+      "agent_name": "Web Research Agent",
+      "timestamp": "2023-10-04T12:00:00Z",
+      "research_period": "last 3 months"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-02-06T20:22:52.101307",
+  "test_message_used": "Hello, provide a sample response",
+  "actual_test_response": {
+    "status": "error",
+    "result": {
+      "research_findings": [],
+      "total_news_items": "0"
+    },
+    "metadata": {
+      "agent_name": "Web Research Agent",
+      "timestamp": "2023-10-04T12:00:00Z",
+      "research_period": "last 3 months"
+    }
+  }
+}

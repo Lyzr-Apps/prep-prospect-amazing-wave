@@ -1,0 +1,15 @@
+{
+  "agent_name": "Calendar Agent",
+  "agent_id": "69864be4f823535a6d0c1816",
+  "test_message": "Fetch today's meetings from Google Calendar and identify external participants with non-company email domains.",
+  "expected_purpose": "assistant",
+  "timestamp": "2026-02-06T20:20:35.703904",
+  "is_valid_json": false,
+  "validation_errors": [
+    "Response is not valid JSON: Expecting ',' delimiter: line 10 column 41 (char 216)"
+  ],
+  "actual_response": {
+    "raw_text": "{\n  \"status\": \"error\",\n  \"result\": {\n    \"meetings\": [],\n    \"total_meetings\": 0,\n    \"total_external_participants\": 0\n  },\n  \"metadata\": {\n    \"agent_name\": \"Calendar Agent\",\n    \"timestamp\": \"2023-11-28T12:00:00Z\" // Example timestamp, update with real time if integrated\n  }\n}"
+  },
+  "raw_response": "{\n  \"status\": \"error\",\n  \"result\": {\n    \"meetings\": [],\n    \"total_meetings\": 0,\n    \"total_external_participants\": 0\n  },\n  \"metadata\": {\n    \"agent_name\": \"Calendar Agent\",\n    \"timestamp\": \"2023-11-28T12:00:00Z\" // Example timestamp, update with real time if integrated\n  }\n}"
+}

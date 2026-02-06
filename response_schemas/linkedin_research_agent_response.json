@@ -1,0 +1,145 @@
+{
+  "agent_name": "LinkedIn Research Agent",
+  "agent_id": "69864c12cb7e55fd6b4f4c48",
+  "agent_purpose": "assistant",
+  "description": "Researches LinkedIn profiles to gather recent posts, announcements, hobbies, languages, education, location, and employment history",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "linkedin_profiles": [
+        {
+          "name": "string",
+          "profile_url": "string",
+          "recent_posts": [
+            "string"
+          ],
+          "recent_announcements": [
+            "string"
+          ],
+          "hobbies": [
+            "string"
+          ],
+          "languages": [
+            "string"
+          ],
+          "education": [
+            {
+              "school": "string",
+              "degree": "string",
+              "year": "string"
+            }
+          ],
+          "location": "string",
+          "mutual_connections": [
+            "string"
+          ],
+          "previous_companies": [
+            "string"
+          ]
+        }
+      ],
+      "total_profiles_researched": "string"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "linkedin_profiles": [
+        {
+          "name": "John Doe",
+          "profile_url": "https://www.linkedin.com/in/johndoe",
+          "recent_posts": [
+            "Excited to announce I'm starting a new position at ABC Corp!",
+            "Just completed a marathon, feeling great!"
+          ],
+          "recent_announcements": [
+            "Promoted to Senior Manager at XYZ Ltd."
+          ],
+          "hobbies": [
+            "Running",
+            "Photography"
+          ],
+          "languages": [
+            "English",
+            "Spanish"
+          ],
+          "education": [
+            {
+              "school": "University of Example",
+              "degree": "Bachelor of Science",
+              "year": "2015"
+            }
+          ],
+          "location": "San Francisco, CA",
+          "mutual_connections": [
+            "Jane Smith",
+            "Mark Johnson"
+          ],
+          "previous_companies": [
+            "XYZ Ltd.",
+            "123 Inc."
+          ]
+        }
+      ],
+      "total_profiles_researched": "1"
+    },
+    "metadata": {
+      "agent_name": "LinkedIn Research Agent",
+      "timestamp": "2023-10-04T12:34:56Z"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-02-06T20:22:49.902151",
+  "test_message_used": "Hello, provide a sample response",
+  "actual_test_response": {
+    "status": "success",
+    "result": {
+      "linkedin_profiles": [
+        {
+          "name": "John Doe",
+          "profile_url": "https://www.linkedin.com/in/johndoe",
+          "recent_posts": [
+            "Excited to announce I'm starting a new position at ABC Corp!",
+            "Just completed a marathon, feeling great!"
+          ],
+          "recent_announcements": [
+            "Promoted to Senior Manager at XYZ Ltd."
+          ],
+          "hobbies": [
+            "Running",
+            "Photography"
+          ],
+          "languages": [
+            "English",
+            "Spanish"
+          ],
+          "education": [
+            {
+              "school": "University of Example",
+              "degree": "Bachelor of Science",
+              "year": "2015"
+            }
+          ],
+          "location": "San Francisco, CA",
+          "mutual_connections": [
+            "Jane Smith",
+            "Mark Johnson"
+          ],
+          "previous_companies": [
+            "XYZ Ltd.",
+            "123 Inc."
+          ]
+        }
+      ],
+      "total_profiles_researched": "1"
+    },
+    "metadata": {
+      "agent_name": "LinkedIn Research Agent",
+      "timestamp": "2023-10-04T12:34:56Z"
+    }
+  }
+}

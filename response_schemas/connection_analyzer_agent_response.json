@@ -1,0 +1,132 @@
+{
+  "agent_name": "Connection Analyzer Agent",
+  "agent_id": "69864c58812c228b6df02829",
+  "agent_purpose": "assistant",
+  "description": "Analyzes mutual LinkedIn connections and identifies overlapping companies in employment histories",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "connection_analysis": [
+        {
+          "prospect_name": "string",
+          "mutual_connections": [
+            {
+              "name": "string",
+              "title": "string",
+              "company": "string",
+              "relationship_to_rep": "string",
+              "relationship_to_prospect": "string"
+            }
+          ],
+          "overlapping_companies": [
+            {
+              "company_name": "string",
+              "rep_tenure": "string",
+              "prospect_tenure": "string",
+              "overlap_period": "string"
+            }
+          ],
+          "shared_education": [
+            {
+              "institution": "string",
+              "rep_details": "string",
+              "prospect_details": "string"
+            }
+          ],
+          "connection_strength": "string",
+          "recommended_approach": "string"
+        }
+      ],
+      "total_mutual_connections": "number"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "connection_analysis": [
+        {
+          "prospect_name": "Jane Doe",
+          "mutual_connections": [
+            {
+              "name": "John Smith",
+              "title": "Senior Account Manager",
+              "company": "Tech Solutions Inc.",
+              "relationship_to_rep": "Colleague",
+              "relationship_to_prospect": "Former Manager"
+            }
+          ],
+          "overlapping_companies": [
+            {
+              "company_name": "Innovative Technologies",
+              "rep_tenure": "2015-2018",
+              "prospect_tenure": "2016-2019",
+              "overlap_period": "2016-2018"
+            }
+          ],
+          "shared_education": [
+            {
+              "institution": "State University",
+              "rep_details": "BSc in Computer Science, 2010-2014",
+              "prospect_details": "MSc in Information Systems, 2012-2014"
+            }
+          ],
+          "connection_strength": "strong",
+          "recommended_approach": "Leverage mutual connection John Smith for a warm introduction and discuss shared experiences at Innovative Technologies and State University to build rapport."
+        }
+      ],
+      "total_mutual_connections": 1
+    },
+    "metadata": {
+      "agent_name": "Connection Analyzer Agent",
+      "timestamp": "2023-10-07T15:30:00Z"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-02-06T20:23:00.241093",
+  "test_message_used": "Hello, provide a sample response",
+  "actual_test_response": {
+    "status": "success",
+    "result": {
+      "connection_analysis": [
+        {
+          "prospect_name": "Jane Doe",
+          "mutual_connections": [
+            {
+              "name": "John Smith",
+              "title": "Senior Account Manager",
+              "company": "Tech Solutions Inc.",
+              "relationship_to_rep": "Colleague",
+              "relationship_to_prospect": "Former Manager"
+            }
+          ],
+          "overlapping_companies": [
+            {
+              "company_name": "Innovative Technologies",
+              "rep_tenure": "2015-2018",
+              "prospect_tenure": "2016-2019",
+              "overlap_period": "2016-2018"
+            }
+          ],
+          "shared_education": [
+            {
+              "institution": "State University",
+              "rep_details": "BSc in Computer Science, 2010-2014",
+              "prospect_details": "MSc in Information Systems, 2012-2014"
+            }
+          ],
+          "connection_strength": "strong",
+          "recommended_approach": "Leverage mutual connection John Smith for a warm introduction and discuss shared experiences at Innovative Technologies and State University to build rapport."
+        }
+      ],
+      "total_mutual_connections": 1
+    },
+    "metadata": {
+      "agent_name": "Connection Analyzer Agent",
+      "timestamp": "2023-10-07T15:30:00Z"
+    }
+  }
+}

@@ -1,0 +1,254 @@
+{
+  "agent_name": "Sports Intelligence Agent",
+  "agent_id": "69864c3e8a54fe39adbfb71c",
+  "agent_purpose": "assistant",
+  "description": "Gets current scores and recent results for professional and college sports teams",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "sports_intel": [
+        {
+          "person_name": "string",
+          "hometown": "string",
+          "college": "string",
+          "professional_teams": [
+            {
+              "team_name": "string",
+              "league": "string",
+              "recent_results": [
+                {
+                  "date": "string",
+                  "opponent": "string",
+                  "score": "string",
+                  "result": "string"
+                }
+              ],
+              "current_record": "string"
+            }
+          ],
+          "college_teams": [
+            {
+              "team_name": "string",
+              "sport": "string",
+              "recent_results": [
+                {
+                  "date": "string",
+                  "opponent": "string",
+                  "score": "string",
+                  "result": "string"
+                }
+              ]
+            }
+          ],
+          "conversation_starters": [
+            "string"
+          ]
+        }
+      ],
+      "total_teams_tracked": "string"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "sports_intel": [
+        {
+          "person_name": "John Doe",
+          "hometown": "Green Bay, WI",
+          "college": "University of Wisconsin-Madison",
+          "professional_teams": [
+            {
+              "team_name": "Green Bay Packers",
+              "league": "NFL",
+              "recent_results": [
+                {
+                  "date": "2023-10-08",
+                  "opponent": "Chicago Bears",
+                  "score": "24-21",
+                  "result": "W"
+                },
+                {
+                  "date": "2023-10-01",
+                  "opponent": "Detroit Lions",
+                  "score": "17-20",
+                  "result": "L"
+                },
+                {
+                  "date": "2023-09-24",
+                  "opponent": "New Orleans Saints",
+                  "score": "30-27",
+                  "result": "W"
+                },
+                {
+                  "date": "2023-09-17",
+                  "opponent": "Atlanta Falcons",
+                  "score": "10-27",
+                  "result": "L"
+                },
+                {
+                  "date": "2023-09-10",
+                  "opponent": "Minnesota Vikings",
+                  "score": "23-7",
+                  "result": "W"
+                }
+              ],
+              "current_record": "3-2"
+            }
+          ],
+          "college_teams": [
+            {
+              "team_name": "Wisconsin Badgers",
+              "sport": "football",
+              "recent_results": [
+                {
+                  "date": "2023-10-07",
+                  "opponent": "Iowa Hawkeyes",
+                  "score": "14-24",
+                  "result": "L"
+                },
+                {
+                  "date": "2023-09-30",
+                  "opponent": "Purdue Boilermakers",
+                  "score": "38-17",
+                  "result": "W"
+                },
+                {
+                  "date": "2023-09-23",
+                  "opponent": "Notre Dame",
+                  "score": "41-13",
+                  "result": "W"
+                },
+                {
+                  "date": "2023-09-16",
+                  "opponent": "Michigan Wolverines",
+                  "score": "24-30",
+                  "result": "L"
+                },
+                {
+                  "date": "2023-09-09",
+                  "opponent": "Kent State",
+                  "score": "31-0",
+                  "result": "W"
+                }
+              ]
+            }
+          ],
+          "conversation_starters": [
+            "Did you catch the Packers' narrow victory over the Bears?",
+            "How do you feel about the Badgers' recent performance against Iowa?"
+          ]
+        }
+      ],
+      "total_teams_tracked": "2"
+    },
+    "metadata": {
+      "agent_name": "Sports Intelligence Agent",
+      "timestamp": "2023-10-15T10:00:00Z"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-02-06T20:22:57.429697",
+  "test_message_used": "Hello, provide a sample response",
+  "actual_test_response": {
+    "status": "success",
+    "result": {
+      "sports_intel": [
+        {
+          "person_name": "John Doe",
+          "hometown": "Green Bay, WI",
+          "college": "University of Wisconsin-Madison",
+          "professional_teams": [
+            {
+              "team_name": "Green Bay Packers",
+              "league": "NFL",
+              "recent_results": [
+                {
+                  "date": "2023-10-08",
+                  "opponent": "Chicago Bears",
+                  "score": "24-21",
+                  "result": "W"
+                },
+                {
+                  "date": "2023-10-01",
+                  "opponent": "Detroit Lions",
+                  "score": "17-20",
+                  "result": "L"
+                },
+                {
+                  "date": "2023-09-24",
+                  "opponent": "New Orleans Saints",
+                  "score": "30-27",
+                  "result": "W"
+                },
+                {
+                  "date": "2023-09-17",
+                  "opponent": "Atlanta Falcons",
+                  "score": "10-27",
+                  "result": "L"
+                },
+                {
+                  "date": "2023-09-10",
+                  "opponent": "Minnesota Vikings",
+                  "score": "23-7",
+                  "result": "W"
+                }
+              ],
+              "current_record": "3-2"
+            }
+          ],
+          "college_teams": [
+            {
+              "team_name": "Wisconsin Badgers",
+              "sport": "football",
+              "recent_results": [
+                {
+                  "date": "2023-10-07",
+                  "opponent": "Iowa Hawkeyes",
+                  "score": "14-24",
+                  "result": "L"
+                },
+                {
+                  "date": "2023-09-30",
+                  "opponent": "Purdue Boilermakers",
+                  "score": "38-17",
+                  "result": "W"
+                },
+                {
+                  "date": "2023-09-23",
+                  "opponent": "Notre Dame",
+                  "score": "41-13",
+                  "result": "W"
+                },
+                {
+                  "date": "2023-09-16",
+                  "opponent": "Michigan Wolverines",
+                  "score": "24-30",
+                  "result": "L"
+                },
+                {
+                  "date": "2023-09-09",
+                  "opponent": "Kent State",
+                  "score": "31-0",
+                  "result": "W"
+                }
+              ]
+            }
+          ],
+          "conversation_starters": [
+            "Did you catch the Packers' narrow victory over the Bears?",
+            "How do you feel about the Badgers' recent performance against Iowa?"
+          ]
+        }
+      ],
+      "total_teams_tracked": "2"
+    },
+    "metadata": {
+      "agent_name": "Sports Intelligence Agent",
+      "timestamp": "2023-10-15T10:00:00Z"
+    }
+  }
+}

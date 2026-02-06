@@ -1,0 +1,74 @@
+{
+  "workflow_name": "Day Planner for Sales Enablement",
+  "workflow_type": "manager_subagent",
+  "created_at": "2026-02-06T00:00:00Z",
+  "agents": {
+    "manager": {
+      "agent_id": "69864ca97a04453a977498b9",
+      "name": "Day Prep Coordinator",
+      "type": "manager",
+      "provider": "OpenAI",
+      "model": "gpt-4o"
+    },
+    "sub_agents": [
+      {
+        "agent_id": "69864be4f823535a6d0c1816",
+        "name": "Calendar Agent",
+        "type": "sub_agent",
+        "provider": "OpenAI",
+        "model": "gpt-4o",
+        "tools": ["googlecalendar"]
+      },
+      {
+        "agent_id": "69864bfce6006e489659fdfe",
+        "name": "Apollo Enrichment Agent",
+        "type": "sub_agent",
+        "provider": "OpenAI",
+        "model": "gpt-4o",
+        "tools": []
+      },
+      {
+        "agent_id": "69864c12cb7e55fd6b4f4c48",
+        "name": "LinkedIn Research Agent",
+        "type": "sub_agent",
+        "provider": "Perplexity",
+        "model": "sonar-pro",
+        "tools": []
+      },
+      {
+        "agent_id": "69864c29f823535a6d0c1819",
+        "name": "Web Research Agent",
+        "type": "sub_agent",
+        "provider": "Perplexity",
+        "model": "sonar-pro",
+        "tools": []
+      },
+      {
+        "agent_id": "69864c3e8a54fe39adbfb71c",
+        "name": "Sports Intelligence Agent",
+        "type": "sub_agent",
+        "provider": "OpenAI",
+        "model": "gpt-4o",
+        "tools": []
+      },
+      {
+        "agent_id": "69864c58812c228b6df02829",
+        "name": "Connection Analyzer Agent",
+        "type": "sub_agent",
+        "provider": "OpenAI",
+        "model": "gpt-4o",
+        "tools": []
+      },
+      {
+        "agent_id": "69864c727a04453a977498b8",
+        "name": "Email Composer Agent",
+        "type": "sub_agent",
+        "provider": "Anthropic",
+        "model": "claude-sonnet-4-5",
+        "tools": ["gmail"]
+      }
+    ]
+  },
+  "total_agents": 8,
+  "status": "completed"
+}

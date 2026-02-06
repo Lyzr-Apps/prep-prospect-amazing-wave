@@ -1,0 +1,122 @@
+{
+  "agent_name": "Calendar Agent",
+  "agent_id": "69864be4f823535a6d0c1816",
+  "agent_purpose": "assistant",
+  "description": "Fetches meetings from Google Calendar and identifies external participants with non-company email domains",
+  "response_schema": {
+    "status": "string",
+    "result": {
+      "meetings": [
+        {
+          "meeting_title": "string",
+          "meeting_time": "string",
+          "duration_minutes": "number",
+          "attendees": [
+            "string"
+          ],
+          "external_participants": [
+            {
+              "email": "string",
+              "name": "string"
+            }
+          ]
+        }
+      ],
+      "total_meetings": "string",
+      "total_external_participants": "string"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string"
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "meetings": [
+        {
+          "meeting_title": "Project Update Meeting",
+          "meeting_time": "2023-10-23T10:00:00Z",
+          "duration_minutes": 60,
+          "attendees": [
+            "john.smith@company.com",
+            "alice@externalpartner.com"
+          ],
+          "external_participants": [
+            {
+              "email": "alice@externalpartner.com",
+              "name": "Alice Johnson"
+            }
+          ]
+        },
+        {
+          "meeting_title": "Weekly Standup",
+          "meeting_time": "2023-10-23T14:00:00Z",
+          "duration_minutes": 30,
+          "attendees": [
+            "peter.smith@company.com",
+            "lucas@externalconsultants.com"
+          ],
+          "external_participants": [
+            {
+              "email": "lucas@externalconsultants.com",
+              "name": "Lucas Martinez"
+            }
+          ]
+        }
+      ],
+      "total_meetings": "2",
+      "total_external_participants": "2"
+    },
+    "metadata": {
+      "agent_name": "Calendar Agent",
+      "timestamp": "2023-10-23T09:00:00Z"
+    }
+  },
+  "is_actual_tested": true,
+  "test_timestamp": "2026-02-06T20:22:41.509295",
+  "test_message_used": "Hello, provide a sample response",
+  "actual_test_response": {
+    "status": "success",
+    "result": {
+      "meetings": [
+        {
+          "meeting_title": "Project Update Meeting",
+          "meeting_time": "2023-10-23T10:00:00Z",
+          "duration_minutes": 60,
+          "attendees": [
+            "john.smith@company.com",
+            "alice@externalpartner.com"
+          ],
+          "external_participants": [
+            {
+              "email": "alice@externalpartner.com",
+              "name": "Alice Johnson"
+            }
+          ]
+        },
+        {
+          "meeting_title": "Weekly Standup",
+          "meeting_time": "2023-10-23T14:00:00Z",
+          "duration_minutes": 30,
+          "attendees": [
+            "peter.smith@company.com",
+            "lucas@externalconsultants.com"
+          ],
+          "external_participants": [
+            {
+              "email": "lucas@externalconsultants.com",
+              "name": "Lucas Martinez"
+            }
+          ]
+        }
+      ],
+      "total_meetings": "2",
+      "total_external_participants": "2"
+    },
+    "metadata": {
+      "agent_name": "Calendar Agent",
+      "timestamp": "2023-10-23T09:00:00Z"
+    }
+  }
+}

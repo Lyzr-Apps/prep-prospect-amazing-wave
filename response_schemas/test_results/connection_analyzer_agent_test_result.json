@@ -1,0 +1,58 @@
+{
+  "agent_name": "Connection Analyzer Agent",
+  "agent_id": "69864c58812c228b6df02829",
+  "test_message": "Analyze mutual LinkedIn connections between me and Sarah Johnson, and identify any overlapping companies in our employment histories.",
+  "expected_purpose": "assistant",
+  "timestamp": "2026-02-06T20:21:28.949398",
+  "is_valid_json": true,
+  "validation_errors": [],
+  "actual_response": {
+    "status": "success",
+    "result": {
+      "connection_analysis": [
+        {
+          "prospect_name": "Sarah Johnson",
+          "mutual_connections": [
+            {
+              "name": "John Doe",
+              "title": "Regional Sales Manager",
+              "company": "Tech Solutions Inc.",
+              "relationship_to_rep": "former colleague",
+              "relationship_to_prospect": "current colleague"
+            },
+            {
+              "name": "Jane Smith",
+              "title": "Marketing Director",
+              "company": "Innovative Corp.",
+              "relationship_to_rep": "school acquaintance",
+              "relationship_to_prospect": "business partner"
+            }
+          ],
+          "overlapping_companies": [
+            {
+              "company_name": "Global Tech",
+              "rep_tenure": "2018-2020",
+              "prospect_tenure": "2019-2021",
+              "overlap_period": "2019-2020"
+            }
+          ],
+          "shared_education": [
+            {
+              "institution": "State University",
+              "rep_details": "B.A. in Business Administration, Class of 2015",
+              "prospect_details": "B.Sc. in Marketing, Class of 2016"
+            }
+          ],
+          "connection_strength": "strong",
+          "recommended_approach": "Leverage mutual connections like John Doe for a warm introduction and discuss shared experiences at Global Tech."
+        }
+      ],
+      "total_mutual_connections": 2
+    },
+    "metadata": {
+      "agent_name": "Connection Analyzer Agent",
+      "timestamp": "2023-11-24T10:05:39Z"
+    }
+  },
+  "raw_response": "{\n  \"status\": \"success\",\n  \"result\": {\n    \"connection_analysis\": [\n      {\n        \"prospect_name\": \"Sarah Johnson\",\n        \"mutual_connections\": [\n          {\n            \"name\": \"John Doe\",\n            \"title\": \"Regional Sales Manager\",\n            \"company\": \"Tech Solutions Inc.\",\n            \"relationship_to_rep\": \"former colleague\",\n            \"relationship_to_prospect\": \"current colleague\"\n          },\n          {\n            \"name\": \"Jane Smith\",\n            \"title\": \"Marketing Director\",\n            \"company\": \"Innovative Corp.\",\n            \"relationship_to_rep\": \"school acquaintance\",\n            \"relationship_to_prospect\": \"business partner\"\n          }\n        ],\n        \"overlapping_companies\": [\n          {\n            \"company_name\": \"Global Tech\",\n            \"rep_tenure\": \"2018-2020\",\n            \"prospect_tenure\": \"2019-2021\",\n            \"overlap_period\": \"2019-2020\"\n          }\n        ],\n        \"shared_education\": [\n          {\n            \"institution\": \"State University\",\n            \"rep_details\": \"B.A. in Business Administration, Class of 2015\",\n            \"prospect_details\": \"B.Sc. in Marketing, Class of 2016\"\n          }\n        ],\n        \"connection_strength\": \"strong\",\n        \"recommended_approach\": \"Leverage mutual connections like John Doe for a warm introduction and discuss shared experiences at Global Tech.\"\n      }\n    ],\n    \"total_mutual_connections\": 2\n  },\n  \"metadata\": {\n    \"agent_name\": \"Connection Analyzer Agent\",\n    \"timestamp\": \"2023-11-24T10:05:39Z\"\n  }\n}"
+}

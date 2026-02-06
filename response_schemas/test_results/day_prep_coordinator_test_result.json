@@ -1,0 +1,15 @@
+{
+  "agent_name": "Day Prep Coordinator",
+  "agent_id": "69864ca97a04453a977498b9",
+  "test_message": "Coordinate the morning prep workflow for today's meetings. Retrieve calendar events, enrich participant data, research LinkedIn profiles, find news articles, get sports scores, analyze connections, and compile the email.",
+  "expected_purpose": "manager",
+  "timestamp": "2026-02-06T20:21:52.672141",
+  "is_valid_json": false,
+  "validation_errors": [
+    "Response is not valid JSON: Expecting value: line 1 column 1 (char 0)"
+  ],
+  "actual_response": {
+    "raw_text": "I'm encountering an error accessing the Google Calendar as there seems to be no connected account for this service. Please verify your Google Calendar connection or provide the necessary access credentials so that I can proceed with fetching today's meetings and external participants."
+  },
+  "raw_response": "I'm encountering an error accessing the Google Calendar as there seems to be no connected account for this service. Please verify your Google Calendar connection or provide the necessary access credentials so that I can proceed with fetching today's meetings and external participants."
+}

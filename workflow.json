@@ -1,0 +1,110 @@
+{
+  "nodes": [
+    {
+      "id": "input_node",
+      "type": "Input",
+      "label": "Daily 6:00 AM Trigger",
+      "nodeCategory": "input"
+    },
+    {
+      "id": "day_prep_coordinator",
+      "type": "Agent",
+      "label": "Day Prep Coordinator",
+      "nodeCategory": "agent",
+      "agent_id": "69864ca97a04453a977498b9"
+    },
+    {
+      "id": "calendar_agent",
+      "type": "Agent",
+      "label": "Calendar Agent",
+      "nodeCategory": "agent",
+      "agent_id": "69864be4f823535a6d0c1816"
+    },
+    {
+      "id": "apollo_enrichment_agent",
+      "type": "Agent",
+      "label": "Apollo Enrichment Agent",
+      "nodeCategory": "agent",
+      "agent_id": "69864bfce6006e489659fdfe"
+    },
+    {
+      "id": "linkedin_research_agent",
+      "type": "Agent",
+      "label": "LinkedIn Research Agent",
+      "nodeCategory": "agent",
+      "agent_id": "69864c12cb7e55fd6b4f4c48"
+    },
+    {
+      "id": "web_research_agent",
+      "type": "Agent",
+      "label": "Web Research Agent",
+      "nodeCategory": "agent",
+      "agent_id": "69864c29f823535a6d0c1819"
+    },
+    {
+      "id": "sports_intelligence_agent",
+      "type": "Agent",
+      "label": "Sports Intelligence Agent",
+      "nodeCategory": "agent",
+      "agent_id": "69864c3e8a54fe39adbfb71c"
+    },
+    {
+      "id": "connection_analyzer_agent",
+      "type": "Agent",
+      "label": "Connection Analyzer Agent",
+      "nodeCategory": "agent",
+      "agent_id": "69864c58812c228b6df02829"
+    },
+    {
+      "id": "email_composer_agent",
+      "type": "Agent",
+      "label": "Email Composer Agent",
+      "nodeCategory": "agent",
+      "agent_id": "69864c727a04453a977498b8"
+    },
+    {
+      "id": "output_node",
+      "type": "Output",
+      "label": "Morning Prep Email Sent",
+      "nodeCategory": "end"
+    }
+  ],
+  "edges": [
+    {
+      "source": "input_node",
+      "target": "day_prep_coordinator"
+    },
+    {
+      "source": "day_prep_coordinator",
+      "target": "calendar_agent"
+    },
+    {
+      "source": "day_prep_coordinator",
+      "target": "apollo_enrichment_agent"
+    },
+    {
+      "source": "day_prep_coordinator",
+      "target": "linkedin_research_agent"
+    },
+    {
+      "source": "day_prep_coordinator",
+      "target": "web_research_agent"
+    },
+    {
+      "source": "day_prep_coordinator",
+      "target": "sports_intelligence_agent"
+    },
+    {
+      "source": "day_prep_coordinator",
+      "target": "connection_analyzer_agent"
+    },
+    {
+      "source": "day_prep_coordinator",
+      "target": "email_composer_agent"
+    },
+    {
+      "source": "email_composer_agent",
+      "target": "output_node"
+    }
+  ]
+}

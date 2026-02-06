@@ -1,0 +1,59 @@
+{
+  "agent_name": "Day Prep Coordinator",
+  "agent_id": "69864ca97a04453a977498b9",
+  "agent_purpose": "manager",
+  "description": "Coordinates the morning prep workflow by orchestrating calendar retrieval, participant enrichment, LinkedIn research, news finding, sports intelligence, connection analysis, and email compilation",
+  "response_schema": {
+    "status": "string (success|error)",
+    "result": {
+      "final_output": "object (aggregated result from sub-agents)",
+      "sub_agent_results": [
+        {
+          "agent_name": "string",
+          "status": "string",
+          "output": "object"
+        }
+      ],
+      "summary": "string",
+      "workflow_completed": "boolean"
+    },
+    "metadata": {
+      "agent_name": "string",
+      "timestamp": "string (ISO)",
+      "sub_agents_used": [
+        "string"
+      ]
+    }
+  },
+  "example_response": {
+    "status": "success",
+    "result": {
+      "final_output": {
+        "aggregated": "data from all sub-agents"
+      },
+      "sub_agent_results": [
+        {
+          "agent_name": "Sub-Agent 1",
+          "status": "success",
+          "output": {
+            "data": "result"
+          }
+        }
+      ],
+      "summary": "All sub-agents completed successfully",
+      "workflow_completed": true
+    },
+    "metadata": {
+      "agent_name": "Day Prep Coordinator",
+      "timestamp": "2025-01-15T10:30:00Z",
+      "sub_agents_used": [
+        "Sub-Agent 1"
+      ]
+    }
+  },
+  "is_actual_tested": false,
+  "test_timestamp": null,
+  "test_message_used": "Process this request and coordinate sub-agents",
+  "raw_test_response": "It seems there was an error in retrieving today's meetings, or there are no meetings scheduled. Below is the status provided by the Calendar Agent:\n\n- **Total Meetings**: 0\n- **External Participants**: 0\n\nGiven this, there are no further actions required for gathering additional participant information or executing other sub-agents as planned.\n\nIf you need any additional assistance or have other tasks, please let me know!",
+  "test_error": "Response not valid JSON: Expecting value: line 1 column 1 (char 0)"
+}

@@ -1,0 +1,219 @@
+{
+  "agent_name": "Sports Intelligence Agent",
+  "agent_id": "69864c3e8a54fe39adbfb71c",
+  "test_message": "Get current scores and recent results for NFL, NBA, and MLB teams in San Francisco, plus Stanford University sports teams.",
+  "expected_purpose": "assistant",
+  "timestamp": "2026-02-06T20:21:22.858955",
+  "is_valid_json": true,
+  "validation_errors": [],
+  "actual_response": {
+    "status": "success",
+    "result": {
+      "sports_intel": [
+        {
+          "person_name": "N/A",
+          "hometown": "San Francisco",
+          "college": "Stanford University",
+          "professional_teams": [
+            {
+              "team_name": "San Francisco 49ers",
+              "league": "NFL",
+              "recent_results": [
+                {
+                  "date": "2023-10-22",
+                  "opponent": "Minnesota Vikings",
+                  "score": "33-30",
+                  "result": "W"
+                },
+                {
+                  "date": "2023-10-15",
+                  "opponent": "Cleveland Browns",
+                  "score": "14-19",
+                  "result": "L"
+                },
+                {
+                  "date": "2023-10-08",
+                  "opponent": "Dallas Cowboys",
+                  "score": "42-10",
+                  "result": "W"
+                },
+                {
+                  "date": "2023-10-01",
+                  "opponent": "Arizona Cardinals",
+                  "score": "35-16",
+                  "result": "W"
+                },
+                {
+                  "date": "2023-09-25",
+                  "opponent": "Los Angeles Rams",
+                  "score": "30-23",
+                  "result": "W"
+                }
+              ],
+              "current_record": "6-1"
+            },
+            {
+              "team_name": "Golden State Warriors",
+              "league": "NBA",
+              "recent_results": [
+                {
+                  "date": "2023-10-25",
+                  "opponent": "Phoenix Suns",
+                  "score": "108-104",
+                  "result": "W"
+                },
+                {
+                  "date": "2023-10-23",
+                  "opponent": "Sacramento Kings",
+                  "score": "105-122",
+                  "result": "L"
+                },
+                {
+                  "date": "2023-10-21",
+                  "opponent": "Los Angeles Lakers",
+                  "score": "98-100",
+                  "result": "L"
+                },
+                {
+                  "date": "2023-10-19",
+                  "opponent": "Denver Nuggets",
+                  "score": "110-99",
+                  "result": "W"
+                },
+                {
+                  "date": "2023-10-17",
+                  "opponent": "Los Angeles Clippers",
+                  "score": "115-110",
+                  "result": "W"
+                }
+              ],
+              "current_record": "3-2"
+            },
+            {
+              "team_name": "San Francisco Giants",
+              "league": "MLB",
+              "recent_results": [
+                {
+                  "date": "2023-10-01",
+                  "opponent": "Los Angeles Dodgers",
+                  "score": "1-5",
+                  "result": "L"
+                },
+                {
+                  "date": "2023-09-30",
+                  "opponent": "Los Angeles Dodgers",
+                  "score": "3-2",
+                  "result": "W"
+                },
+                {
+                  "date": "2023-09-29",
+                  "opponent": "Los Angeles Dodgers",
+                  "score": "0-7",
+                  "result": "L"
+                },
+                {
+                  "date": "2023-09-27",
+                  "opponent": "San Diego Padres",
+                  "score": "4-8",
+                  "result": "L"
+                },
+                {
+                  "date": "2023-09-26",
+                  "opponent": "San Diego Padres",
+                  "score": "6-0",
+                  "result": "W"
+                }
+              ],
+              "current_record": "79-83"
+            }
+          ],
+          "college_teams": [
+            {
+              "team_name": "Stanford Cardinal Football",
+              "sport": "football",
+              "recent_results": [
+                {
+                  "date": "2023-10-21",
+                  "opponent": "UCLA",
+                  "score": "7-34",
+                  "result": "L"
+                },
+                {
+                  "date": "2023-10-14",
+                  "opponent": "Washington State",
+                  "score": "24-30",
+                  "result": "L"
+                },
+                {
+                  "date": "2023-10-07",
+                  "opponent": "Oregon State",
+                  "score": "28-32",
+                  "result": "L"
+                },
+                {
+                  "date": "2023-09-30",
+                  "opponent": "Colorado",
+                  "score": "33-22",
+                  "result": "W"
+                },
+                {
+                  "date": "2023-09-23",
+                  "opponent": "Arizona",
+                  "score": "27-10",
+                  "result": "W"
+                }
+              ]
+            },
+            {
+              "team_name": "Stanford Cardinal Basketball",
+              "sport": "basketball",
+              "recent_results": [
+                {
+                  "date": "2023-10-20",
+                  "opponent": "BYU",
+                  "score": "74-69",
+                  "result": "W"
+                },
+                {
+                  "date": "2023-10-15",
+                  "opponent": "Arizona State",
+                  "score": "61-56",
+                  "result": "W"
+                },
+                {
+                  "date": "2023-10-10",
+                  "opponent": "USC",
+                  "score": "68-72",
+                  "result": "L"
+                },
+                {
+                  "date": "2023-10-05",
+                  "opponent": "UCLA",
+                  "score": "75-83",
+                  "result": "L"
+                },
+                {
+                  "date": "2023-10-01",
+                  "opponent": "Oregon",
+                  "score": "77-82",
+                  "result": "L"
+                }
+              ]
+            }
+          ],
+          "conversation_starters": [
+            "Did you catch the 49ers' thrilling 33-30 victory over the Vikings?",
+            "The Warriors had a solid win against the Suns recently, have you been following Steph Curry's performance this season?",
+            "Despite a tough season, the Giants had a memorable win against the Dodgers last month."
+          ]
+        }
+      ],
+      "total_teams_tracked": 5
+    },
+    "metadata": {
+      "agent_name": "Sports Intelligence Agent",
+      "timestamp": "2023-10-26T18:46:00Z"
+    }
+  },
+  "raw_response": "{\n  \"status\": \"success\",\n  \"result\": {\n    \"sports_intel\": [\n      {\n        \"person_name\": \"N/A\",\n        \"hometown\": \"San Francisco\",\n        \"college\": \"Stanford University\",\n        \"professional_teams\": [\n          {\n            \"team_name\": \"San Francisco 49ers\",\n            \"league\": \"NFL\",\n            \"recent_results\": [\n              {\n                \"date\": \"2023-10-22\",\n                \"opponent\": \"Minnesota Vikings\",\n                \"score\": \"33-30\",\n                \"result\": \"W\"\n              },\n              {\n                \"date\": \"2023-10-15\",\n                \"opponent\": \"Cleveland Browns\",\n                \"score\": \"14-19\",\n                \"result\": \"L\"\n              },\n              {\n                \"date\": \"2023-10-08\",\n                \"opponent\": \"Dallas Cowboys\",\n                \"score\": \"42-10\",\n                \"result\": \"W\"\n              },\n              {\n                \"date\": \"2023-10-01\",\n                \"opponent\": \"Arizona Cardinals\",\n                \"score\": \"35-16\",\n                \"result\": \"W\"\n              },\n              {\n                \"date\": \"2023-09-25\",\n                \"opponent\": \"Los Angeles Rams\",\n                \"score\": \"30-23\",\n                \"result\": \"W\"\n              }\n            ],\n            \"current_record\": \"6-1\"\n          },\n          {\n            \"team_name\": \"Golden State Warriors\",\n            \"league\": \"NBA\",\n            \"recent_results\": [\n              {\n                \"date\": \"2023-10-25\",\n                \"opponent\": \"Phoenix Suns\",\n                \"score\": \"108-104\",\n                \"result\": \"W\"\n              },\n              {\n                \"date\": \"2023-10-23\",\n                \"opponent\": \"Sacramento Kings\",\n                \"score\": \"105-122\",\n                \"result\": \"L\"\n              },\n              {\n                \"date\": \"2023-10-21\",\n                \"opponent\": \"Los Angeles Lakers\",\n                \"score\": \"98-100\",\n                \"result\": \"L\"\n              },\n              {\n                \"date\": \"2023-10-19\",\n                \"opponent\": \"Denver Nuggets\",\n                \"score\": \"110-99\",\n                \"result\": \"W\"\n              },\n              {\n                \"date\": \"2023-10-17\",\n                \"opponent\": \"Los Angeles Clippers\",\n                \"score\": \"115-110\",\n                \"result\": \"W\"\n              }\n            ],\n            \"current_record\": \"3-2\"\n          },\n          {\n            \"team_name\": \"San Francisco Giants\",\n            \"league\": \"MLB\",\n            \"recent_results\": [\n              {\n                \"date\": \"2023-10-01\",\n                \"opponent\": \"Los Angeles Dodgers\",\n                \"score\": \"1-5\",\n                \"result\": \"L\"\n              },\n              {\n                \"date\": \"2023-09-30\",\n                \"opponent\": \"Los Angeles Dodgers\",\n                \"score\": \"3-2\",\n                \"result\": \"W\"\n              },\n              {\n                \"date\": \"2023-09-29\",\n                \"opponent\": \"Los Angeles Dodgers\",\n                \"score\": \"0-7\",\n                \"result\": \"L\"\n              },\n              {\n                \"date\": \"2023-09-27\",\n                \"opponent\": \"San Diego Padres\",\n                \"score\": \"4-8\",\n                \"result\": \"L\"\n              },\n              {\n                \"date\": \"2023-09-26\",\n                \"opponent\": \"San Diego Padres\",\n                \"score\": \"6-0\",\n                \"result\": \"W\"\n              }\n            ],\n            \"current_record\": \"79-83\"\n          }\n        ],\n        \"college_teams\": [\n          {\n            \"team_name\": \"Stanford Cardinal Football\",\n            \"sport\": \"football\",\n            \"recent_results\": [\n              {\n                \"date\": \"2023-10-21\",\n                \"opponent\": \"UCLA\",\n                \"score\": \"7-34\",\n                \"result\": \"L\"\n              },\n              {\n                \"date\": \"2023-10-14\",\n                \"opponent\": \"Washington State\",\n                \"score\": \"24-30\",\n                \"result\": \"L\"\n              },\n              {\n                \"date\": \"2023-10-07\",\n                \"opponent\": \"Oregon State\",\n                \"score\": \"28-32\",\n                \"result\": \"L\"\n              },\n              {\n                \"date\": \"2023-09-30\",\n                \"opponent\": \"Colorado\",\n                \"score\": \"33-22\",\n                \"result\": \"W\"\n              },\n              {\n                \"date\": \"2023-09-23\",\n                \"opponent\": \"Arizona\",\n                \"score\": \"27-10\",\n                \"result\": \"W\"\n              }\n            ]\n          },\n          {\n            \"team_name\": \"Stanford Cardinal Basketball\",\n            \"sport\": \"basketball\",\n            \"recent_results\": [\n              {\n                \"date\": \"2023-10-20\",\n                \"opponent\": \"BYU\",\n                \"score\": \"74-69\",\n                \"result\": \"W\"\n              },\n              {\n                \"date\": \"2023-10-15\",\n                \"opponent\": \"Arizona State\",\n                \"score\": \"61-56\",\n                \"result\": \"W\"\n              },\n              {\n                \"date\": \"2023-10-10\",\n                \"opponent\": \"USC\",\n                \"score\": \"68-72\",\n                \"result\": \"L\"\n              },\n              {\n                \"date\": \"2023-10-05\",\n                \"opponent\": \"UCLA\",\n                \"score\": \"75-83\",\n                \"result\": \"L\"\n              },\n              {\n                \"date\": \"2023-10-01\",\n                \"opponent\": \"Oregon\",\n                \"score\": \"77-82\",\n                \"result\": \"L\"\n              }\n            ]\n          }\n        ],\n        \"conversation_starters\": [\n          \"Did you catch the 49ers' thrilling 33-30 victory over the Vikings?\",\n          \"The Warriors had a solid win against the Suns recently, have you been following Steph Curry's performance this season?\",\n          \"Despite a tough season, the Giants had a memorable win against the Dodgers last month.\"\n        ]\n      }\n    ],\n    \"total_teams_tracked\": 5\n  },\n  \"metadata\": {\n    \"agent_name\": \"Sports Intelligence Agent\",\n    \"timestamp\": \"2023-10-26T18:46:00Z\"\n  }\n}"
+}

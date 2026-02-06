@@ -1,0 +1,41 @@
+{
+  "agent_name": "Apollo Enrichment Agent",
+  "agent_id": "69864bfce6006e489659fdfe",
+  "test_message": "Enrich the profile for john.smith@techcorp.com - extract name, company, title, seniority, industry, company size, and technologies used.",
+  "expected_purpose": "assistant",
+  "timestamp": "2026-02-06T20:20:38.464803",
+  "is_valid_json": true,
+  "validation_errors": [],
+  "actual_response": {
+    "status": "success",
+    "result": {
+      "enriched_contacts": [
+        {
+          "email": "john.smith@techcorp.com",
+          "name": "John Smith",
+          "title": "Senior Software Engineer",
+          "seniority": "Senior",
+          "company": {
+            "name": "TechCorp",
+            "industry": "Information Technology",
+            "size": "501-1000 employees",
+            "funding_stage": "Series C",
+            "technologies": [
+              "Java",
+              "Python",
+              "AWS",
+              "Docker"
+            ]
+          }
+        }
+      ],
+      "total_enriched": 1,
+      "enrichment_rate": "100%"
+    },
+    "metadata": {
+      "agent_name": "Apollo Enrichment Agent",
+      "timestamp": "2023-10-06T12:00:00Z"
+    }
+  },
+  "raw_response": "{\n  \"status\": \"success\",\n  \"result\": {\n    \"enriched_contacts\": [\n      {\n        \"email\": \"john.smith@techcorp.com\",\n        \"name\": \"John Smith\",\n        \"title\": \"Senior Software Engineer\",\n        \"seniority\": \"Senior\",\n        \"company\": {\n          \"name\": \"TechCorp\",\n          \"industry\": \"Information Technology\",\n          \"size\": \"501-1000 employees\",\n          \"funding_stage\": \"Series C\",\n          \"technologies\": [\"Java\", \"Python\", \"AWS\", \"Docker\"]\n        }\n      }\n    ],\n    \"total_enriched\": 1,\n    \"enrichment_rate\": \"100%\"\n  },\n  \"metadata\": {\n    \"agent_name\": \"Apollo Enrichment Agent\",\n    \"timestamp\": \"2023-10-06T12:00:00Z\"\n  }\n}"
+}

@@ -1,0 +1,15 @@
+{
+  "agent_name": "Email Composer Agent",
+  "agent_id": "69864c727a04453a977498b8",
+  "test_message": "Compile a morning prep email for today's meeting with Sarah Johnson at TechCorp, including Apollo enrichment data, LinkedIn insights, company news, sports scores, and mutual connections.",
+  "expected_purpose": "assistant",
+  "timestamp": "2026-02-06T20:21:39.128411",
+  "is_valid_json": false,
+  "validation_errors": [
+    "Response is not valid JSON: Expecting value: line 1 column 1 (char 0)"
+  ],
+  "actual_response": {
+    "raw_text": "I see that no research data has been compiled yet. To create your morning prep email for Sarah Johnson at TechCorp, I need the following information:\n\n1. **Calendar Data**: Meeting time, duration, and agenda details\n2. **Apollo Enrichment**: Sarah's contact info, role, tech stack, company size\n3. **LinkedIn Insights**: Sarah's background, recent posts, career history\n4. **Company News**: Recent TechCorp announcements, funding, product launches\n5. **Sports Scores**: Relevant local team results for conversation starters\n6. **Mutual Connections**: Shared contacts or network overlap\n\nAdditionally, I need:\n- **Your email address** (recipient for the morning prep)\n- **Meeting date/time**\n- **Any specific topics or goals** for this meeting\n\nCould you provide either:\n- The compiled research data from previous agents, OR\n- The raw information listed above so I can create a comprehensive morning prep email for you?\n\nOnce I have this information, I'll create a professional, scannable email with:\n- Key talking points and insights\n- Conversation starters\n- Actionable recommendations\n- Well-organized sections for easy reference"
+  },
+  "raw_response": "I see that no research data has been compiled yet. To create your morning prep email for Sarah Johnson at TechCorp, I need the following information:\n\n1. **Calendar Data**: Meeting time, duration, and agenda details\n2. **Apollo Enrichment**: Sarah's contact info, role, tech stack, company size\n3. **LinkedIn Insights**: Sarah's background, recent posts, career history\n4. **Company News**: Recent TechCorp announcements, funding, product launches\n5. **Sports Scores**: Relevant local team results for conversation starters\n6. **Mutual Connections**: Shared contacts or network overlap\n\nAdditionally, I need:\n- **Your email address** (recipient for the morning prep)\n- **Meeting date/time**\n- **Any specific topics or goals** for this meeting\n\nCould you provide either:\n- The compiled research data from previous agents, OR\n- The raw information listed above so I can create a comprehensive morning prep email for you?\n\nOnce I have this information, I'll create a professional, scannable email with:\n- Key talking points and insights\n- Conversation starters\n- Actionable recommendations\n- Well-organized sections for easy reference"
+}
