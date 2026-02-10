@@ -291,35 +291,75 @@ export default function Home() {
   const handleGeneratePreview = async () => {
     setPreviewLoading(true)
     try {
+      // Get today's date in a clear format
+      const today = new Date()
+      const todayFormatted = today.toISOString().split('T')[0] // YYYY-MM-DD
+      const todayReadable = today.toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      })
+
       // Build the message for the coordinator
-      const message = `Generate a day prep preview for today with the following settings:
-Company domains: ${config.companyDomains}
-Email recipient: ${config.emailRecipient}
-LinkedIn URL: ${config.linkedInUrl}
-Previous companies: ${config.previousCompanies}
-Hometown: ${config.hometown}
-Research preferences: Apollo=${config.enableApollo}, LinkedIn=${config.enableLinkedIn}, News=${config.enableNews}, Sports=${config.enableSports}, Connections=${config.enableConnections}`
+      const message = `Generate a day prep preview for today (${todayReadable}, ${todayFormatted}) with the following settings:
+
+Company domains to filter: ${config.companyDomains}
+Email recipient: ${config.emailRecipient || 'Not specified'}
+LinkedIn URL: ${config.linkedInUrl || 'Not specified'}
+Previous companies: ${config.previousCompanies || 'Not specified'}
+Hometown: ${config.hometown || 'Not specified'}
+Research preferences: Apollo=${config.enableApollo}, LinkedIn=${config.enableLinkedIn}, News=${config.enableNews}, Sports=${config.enableSports}, Connections=${config.enableConnections}
+
+Please retrieve all calendar events for ${todayFormatted} and provide detailed research on external participants.`
 
       // Call the coordinator agent
       const result = await callAIAgent(message, AGENTS.coordinator)
+
+      console.log('Coordinator response:', JSON.stringify(result, null, 2))
 
       if (result.success && result.response.status === 'success') {
         // Parse the coordinator response
         const coordinatorResult = result.response.result
 
-        // Extract calendar data
-        if (coordinatorResult.final_output?.calendar) {
+        console.log('Coordinator result structure:', {
+          has_final_output: !!coordinatorResult.final_output,
+          has_sub_agent_results: !!coordinatorResult.sub_agent_results,
+          final_output_keys: coordinatorResult.final_output ? Object.keys(coordinatorResult.final_output) : [],
+          sub_agent_count: coordinatorResult.sub_agent_results?.length || 0
+        })
+
+        // Extract calendar data - try multiple paths
+        let extractedMeetings: Meeting[] = []
+
+        if (coordinatorResult.final_output?.calendar?.meetings) {
           const calendarData = coordinatorResult.final_output.calendar as CalendarAgentResult
-          setMeetings(calendarData.meetings || [])
+          extractedMeetings = calendarData.meetings || []
+          console.log('Found meetings in final_output.calendar:', extractedMeetings.length)
         } else if (coordinatorResult.sub_agent_results) {
           // Try to find calendar data in sub-agent results
           const calendarAgent = coordinatorResult.sub_agent_results.find(
-            (agent: any) => agent.agent_name === 'Calendar Agent'
+            (agent: any) => agent.agent_name === 'Calendar Agent' || agent.agent_name?.includes('Calendar')
           )
+          console.log('Calendar agent found:', !!calendarAgent)
+          console.log('Calendar agent structure:', calendarAgent ? Object.keys(calendarAgent) : [])
+
           if (calendarAgent?.output?.meetings) {
-            setMeetings(calendarAgent.output.meetings)
+            extractedMeetings = calendarAgent.output.meetings
+            console.log('Found meetings in sub_agent_results:', extractedMeetings.length)
+          } else if (calendarAgent?.result?.meetings) {
+            extractedMeetings = calendarAgent.result.meetings
+            console.log('Found meetings in sub_agent result.meetings:', extractedMeetings.length)
           }
         }
+
+        // Also check top-level meetings field
+        if (extractedMeetings.length === 0 && coordinatorResult.meetings) {
+          extractedMeetings = coordinatorResult.meetings
+          console.log('Found meetings at top level:', extractedMeetings.length)
+        }
+
+        setMeetings(extractedMeetings)
 
         // Build enriched participants map from all sub-agent results
         const participantsMap = new Map<string, EnrichedParticipant>()
@@ -365,23 +405,62 @@ Research preferences: Apollo=${config.enableApollo}, LinkedIn=${config.enableLin
           }
         }
 
-        // Add to history
+        // Add to history with accurate counts
         const newHistoryEntry: HistoryEntry = {
           id: Date.now().toString(),
           date: new Date().toISOString().split('T')[0],
-          meetings: (coordinatorResult.final_output?.calendar as CalendarAgentResult)?.meetings?.length || 0,
+          meetings: extractedMeetings.length,
           participants: participantsMap.size,
           emailStatus: 'sent',
           emailContent: emailContent
         }
         setHistory(prev => [newHistoryEntry, ...prev])
 
+        console.log('History entry created:', {
+          meetings: extractedMeetings.length,
+          participants: participantsMap.size,
+          emailContentLength: emailContent.length
+        })
+
+        // Show preview tab
         setActiveTab('preview')
+
+        // Log summary
+        if (extractedMeetings.length === 0) {
+          console.warn('No meetings found for today. This could mean:')
+          console.warn('1. There are genuinely no meetings today')
+          console.warn('2. The Calendar Agent is not connected properly')
+          console.warn('3. The response format has changed')
+          console.warn('Raw coordinator result:', coordinatorResult)
+        }
       } else {
         console.error('Coordinator agent failed:', result.response.message)
+        console.error('Full error response:', result)
+
+        // Still create a history entry to track the failed attempt
+        const failedHistoryEntry: HistoryEntry = {
+          id: Date.now().toString(),
+          date: new Date().toISOString().split('T')[0],
+          meetings: 0,
+          participants: 0,
+          emailStatus: 'failed',
+          emailContent: `Error: ${result.response.message || 'Unknown error occurred'}`
+        }
+        setHistory(prev => [failedHistoryEntry, ...prev])
       }
     } catch (error) {
       console.error('Failed to generate preview:', error)
+
+      // Track the error in history
+      const errorHistoryEntry: HistoryEntry = {
+        id: Date.now().toString(),
+        date: new Date().toISOString().split('T')[0],
+        meetings: 0,
+        participants: 0,
+        emailStatus: 'failed',
+        emailContent: `Error: ${error instanceof Error ? error.message : 'Unknown error occurred'}`
+      }
+      setHistory(prev => [errorHistoryEntry, ...prev])
     } finally {
       setPreviewLoading(false)
     }
