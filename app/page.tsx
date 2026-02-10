@@ -220,6 +220,7 @@ export default function Home() {
   const [expandedMeetings, setExpandedMeetings] = useState<Set<number>>(new Set())
   const [expandedParticipants, setExpandedParticipants] = useState<Set<string>>(new Set())
   const [debugInfo, setDebugInfo] = useState<string>('')
+  const [errorMessage, setErrorMessage] = useState<string>('')
 
   // History state
   const [history, setHistory] = useState<HistoryEntry[]>([
