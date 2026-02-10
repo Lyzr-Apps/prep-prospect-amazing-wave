@@ -182,6 +182,7 @@ interface DayPlannerConfig {
   timezone: string
   enabled: boolean
   companyDomains: string
+  emailRecipient: string
   linkedInUrl: string
   previousCompanies: string
   hometown: string
@@ -223,6 +224,7 @@ export default function Home() {
     timezone: 'America/New_York',
     enabled: true,
     companyDomains: 'company.com',
+    emailRecipient: '',
     linkedInUrl: '',
     previousCompanies: '',
     hometown: '',
@@ -292,6 +294,7 @@ export default function Home() {
       // Build the message for the coordinator
       const message = `Generate a day prep preview for today with the following settings:
 Company domains: ${config.companyDomains}
+Email recipient: ${config.emailRecipient}
 LinkedIn URL: ${config.linkedInUrl}
 Previous companies: ${config.previousCompanies}
 Hometown: ${config.hometown}
@@ -559,6 +562,21 @@ Research preferences: Apollo=${config.enableApollo}, LinkedIn=${config.enableLin
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="emailRecipient">Email Address for Morning Prep</Label>
+                      <Input
+                        id="emailRecipient"
+                        type="email"
+                        placeholder="your.email@company.com"
+                        value={config.emailRecipient}
+                        onChange={(e) =>
+                          setConfig(prev => ({ ...prev, emailRecipient: e.target.value }))
+                        }
+                      />
+                      <p className="text-xs text-slate-500">
+                        Where to send the daily prep email
+                      </p>
+                    </div>
                     <div className="space-y-2">
                       <Label htmlFor="linkedInUrl">LinkedIn Profile URL</Label>
                       <Input
