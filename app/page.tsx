@@ -35,7 +35,8 @@ import {
   Play,
   Download,
   Upload,
-  RotateCcw
+  RotateCcw,
+  AlertCircle
 } from 'lucide-react'
 
 // TypeScript interfaces based on actual response schemas
@@ -566,6 +567,7 @@ IMPORTANT: Please retrieve ALL calendar events for ${dateFormatted}. Filter to s
   // Test Calendar Agent directly
   const handleTestCalendar = async () => {
     setPreviewLoading(true)
+    setErrorMessage('')
     try {
       const dateFormatted = config.selectedDate
       const message = `Please fetch ALL calendar events for ${dateFormatted}. Return the complete list of meetings including all participants.`
@@ -576,8 +578,48 @@ IMPORTANT: Please retrieve ALL calendar events for ${dateFormatted}. Filter to s
       console.log('Calendar Agent direct response:', JSON.stringify(result, null, 2))
       setDebugInfo(JSON.stringify(result, null, 2))
 
-      alert('Check console and debug panel for Calendar Agent response')
+      // Display error if present
+      if (!result.success || result.response.status === 'error') {
+        const errorMsg = result.error || result.response.message || 'Unknown error from Calendar Agent'
+        setErrorMessage(`Calendar Agent Error: ${errorMsg}`)
+        console.error('Calendar Agent returned error:', errorMsg)
+      } else {
+        setErrorMessage('')
+        console.log('Calendar Agent test successful!')
+      }
     } catch (error) {
+      const errorMsg = error instanceof Error ? error.message : 'Network error'
+      setErrorMessage(`Calendar test failed: ${errorMsg}`)
+      console.error('Calendar test failed:', error)
+    } finally {
+      setPreviewLoading(false)
+    }
+  }
+
+  // Test with simpler message
+  const handleTestCalendarSimple = async () => {
+    setPreviewLoading(true)
+    setErrorMessage('')
+    try {
+      const message = 'List my calendar events for today'
+
+      console.log('Testing Calendar Agent (simple) with message:', message)
+      const result = await callAIAgent(message, AGENTS.calendar)
+
+      console.log('Calendar Agent simple test response:', JSON.stringify(result, null, 2))
+      setDebugInfo(JSON.stringify(result, null, 2))
+
+      if (!result.success || result.response.status === 'error') {
+        const errorMsg = result.error || result.response.message || 'Unknown error from Calendar Agent'
+        setErrorMessage(`Calendar Agent Error: ${errorMsg}`)
+        console.error('Calendar Agent returned error:', errorMsg)
+      } else {
+        setErrorMessage('')
+        console.log('Calendar Agent simple test successful!')
+      }
+    } catch (error) {
+      const errorMsg = error instanceof Error ? error.message : 'Network error'
+      setErrorMessage(`Calendar test failed: ${errorMsg}`)
       console.error('Calendar test failed:', error)
     } finally {
       setPreviewLoading(false)
@@ -988,24 +1030,45 @@ IMPORTANT: Please retrieve ALL calendar events for ${dateFormatted}. Filter to s
                         </>
                       )}
                     </Button>
-                    <Button
-                      onClick={handleTestCalendar}
-                      disabled={previewLoading}
-                      className="w-full"
-                      variant="secondary"
-                    >
-                      {previewLoading ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Testing...
-                        </>
-                      ) : (
-                        <>
-                          <Calendar className="mr-2 h-4 w-4" />
-                          Test Calendar Agent
-                        </>
-                      )}
-                    </Button>
+                    <div className="space-y-2">
+                      <p className="text-xs font-medium text-slate-700">Diagnostic Tests</p>
+                      <Button
+                        onClick={handleTestCalendar}
+                        disabled={previewLoading}
+                        className="w-full"
+                        variant="secondary"
+                      >
+                        {previewLoading ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Testing...
+                          </>
+                        ) : (
+                          <>
+                            <Calendar className="mr-2 h-4 w-4" />
+                            Test Calendar (Date Specific)
+                          </>
+                        )}
+                      </Button>
+                      <Button
+                        onClick={handleTestCalendarSimple}
+                        disabled={previewLoading}
+                        className="w-full"
+                        variant="secondary"
+                      >
+                        {previewLoading ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Testing...
+                          </>
+                        ) : (
+                          <>
+                            <Calendar className="mr-2 h-4 w-4" />
+                            Test Calendar (Simple)
+                          </>
+                        )}
+                      </Button>
+                    </div>
                     <Button
                       onClick={handleSaveConfig}
                       disabled={loading}
@@ -1080,6 +1143,30 @@ IMPORTANT: Please retrieve ALL calendar events for ${dateFormatted}. Filter to s
           {/* Meeting Preview */}
           <TabsContent value="preview" className="mt-6">
             <div className="space-y-6">
+              {/* Error Display */}
+              {errorMessage && (
+                <Card className="border-red-400 bg-red-50">
+                  <CardHeader>
+                    <CardTitle className="text-sm flex items-center gap-2 text-red-700">
+                      <AlertCircle className="h-5 w-5" />
+                      Error Details
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-red-800 font-medium mb-3">{errorMessage}</p>
+                    <div className="bg-white p-3 rounded border border-red-200">
+                      <p className="text-xs text-slate-600 mb-2 font-semibold">Troubleshooting Steps:</p>
+                      <ol className="text-xs text-slate-700 space-y-1 list-decimal list-inside">
+                        <li>Verify the Calendar Agent (ID: {AGENTS.calendar}) is properly configured in Lyzr</li>
+                        <li>Check if Google Calendar OAuth is connected in the Lyzr dashboard</li>
+                        <li>Try the "Test Calendar (Simple)" button to test with a basic query</li>
+                        <li>Review the Debug Information panel below for the full error response</li>
+                      </ol>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
               {/* Debug Panel */}
               {debugInfo && (
                 <Card className="border-orange-300 bg-orange-50">
