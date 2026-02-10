@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { callAIAgent } from '@/lib/aiAgent'
+import { useConfig } from '@/lib/useConfig'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -31,7 +32,10 @@ import {
   RefreshCw,
   Check,
   X,
-  Play
+  Play,
+  Download,
+  Upload,
+  RotateCcw
 } from 'lucide-react'
 
 // TypeScript interfaces based on actual response schemas
@@ -176,22 +180,8 @@ interface EmailComposerResult {
   suggestions?: string[]
 }
 
-// Configuration state
-interface DayPlannerConfig {
-  scheduleTime: string
-  timezone: string
-  enabled: boolean
-  companyDomains: string
-  emailRecipient: string
-  linkedInUrl: string
-  previousCompanies: string
-  hometown: string
-  enableApollo: boolean
-  enableLinkedIn: boolean
-  enableNews: boolean
-  enableSports: boolean
-  enableConnections: boolean
-}
+// Re-export DayPlannerConfig type from useConfig hook
+import type { DayPlannerConfig } from '@/lib/useConfig'
 
 // Meeting preview state
 interface EnrichedParticipant {
@@ -217,23 +207,10 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState('config')
   const [loading, setLoading] = useState(false)
   const [previewLoading, setPreviewLoading] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
-  // Configuration state
-  const [config, setConfig] = useState<DayPlannerConfig>({
-    scheduleTime: '06:00',
-    timezone: 'America/New_York',
-    enabled: true,
-    companyDomains: 'company.com',
-    emailRecipient: '',
-    linkedInUrl: '',
-    previousCompanies: '',
-    hometown: '',
-    enableApollo: true,
-    enableLinkedIn: true,
-    enableNews: true,
-    enableSports: true,
-    enableConnections: true,
-  })
+  // Configuration state with persistence
+  const { config, setConfig, resetConfig, exportConfig, importConfig, isLoaded } = useConfig()
 
   // Meeting preview state
   const [meetings, setMeetings] = useState<Meeting[]>([])
@@ -277,13 +254,33 @@ export default function Home() {
   const handleSaveConfig = async () => {
     setLoading(true)
     try {
-      // In a real app, this would save to a database or API
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      console.log('Configuration saved:', config)
+      // Configuration is automatically saved to localStorage via the useConfig hook
+      await new Promise(resolve => setTimeout(resolve, 500))
+      console.log('Configuration saved successfully')
     } catch (error) {
       console.error('Failed to save configuration:', error)
     } finally {
       setLoading(false)
+    }
+  }
+
+  // Handle file import
+  const handleImportConfig = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    setLoading(true)
+    try {
+      await importConfig(file)
+      console.log('Configuration imported successfully')
+    } catch (error) {
+      console.error('Failed to import configuration:', error)
+    } finally {
+      setLoading(false)
+      // Reset file input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = ''
+      }
     }
   }
 
@@ -892,6 +889,53 @@ Please retrieve all calendar events for ${todayFormatted} and provide detailed r
                         </>
                       )}
                     </Button>
+
+                    <Separator />
+
+                    <div className="space-y-2">
+                      <p className="text-xs text-slate-500 font-medium">Configuration Management</p>
+
+                      <Button
+                        onClick={exportConfig}
+                        disabled={loading}
+                        className="w-full"
+                        variant="outline"
+                        size="sm"
+                      >
+                        <Download className="mr-2 h-4 w-4" />
+                        Export Config
+                      </Button>
+
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="application/json,.json"
+                        onChange={handleImportConfig}
+                        className="hidden"
+                      />
+
+                      <Button
+                        onClick={() => fileInputRef.current?.click()}
+                        disabled={loading}
+                        className="w-full"
+                        variant="outline"
+                        size="sm"
+                      >
+                        <Upload className="mr-2 h-4 w-4" />
+                        Import Config
+                      </Button>
+
+                      <Button
+                        onClick={resetConfig}
+                        disabled={loading}
+                        className="w-full"
+                        variant="outline"
+                        size="sm"
+                      >
+                        <RotateCcw className="mr-2 h-4 w-4" />
+                        Reset to Defaults
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               </div>
