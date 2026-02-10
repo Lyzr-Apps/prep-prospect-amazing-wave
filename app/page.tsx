@@ -218,6 +218,7 @@ export default function Home() {
   const [enrichedParticipants, setEnrichedParticipants] = useState<Map<string, EnrichedParticipant>>(new Map())
   const [expandedMeetings, setExpandedMeetings] = useState<Set<number>>(new Set())
   const [expandedParticipants, setExpandedParticipants] = useState<Set<string>>(new Set())
+  const [debugInfo, setDebugInfo] = useState<string>('')
 
   // History state
   const [history, setHistory] = useState<HistoryEntry[]>([
@@ -371,6 +372,9 @@ IMPORTANT: Please retrieve ALL calendar events for ${dateFormatted}. Filter to s
       const result = await callAIAgent(message, AGENTS.coordinator)
 
       console.log('Coordinator response:', JSON.stringify(result, null, 2))
+
+      // Store debug info for user inspection
+      setDebugInfo(JSON.stringify(result, null, 2))
 
       if (result.success && result.response.status === 'success') {
         // Parse the coordinator response
@@ -557,6 +561,27 @@ IMPORTANT: Please retrieve ALL calendar events for ${dateFormatted}. Filter to s
   const handleRefreshParticipant = async (email: string) => {
     console.log('Refreshing data for:', email)
     // In a real app, this would call individual agents to refresh data
+  }
+
+  // Test Calendar Agent directly
+  const handleTestCalendar = async () => {
+    setPreviewLoading(true)
+    try {
+      const dateFormatted = config.selectedDate
+      const message = `Please fetch ALL calendar events for ${dateFormatted}. Return the complete list of meetings including all participants.`
+
+      console.log('Testing Calendar Agent with message:', message)
+      const result = await callAIAgent(message, AGENTS.calendar)
+
+      console.log('Calendar Agent direct response:', JSON.stringify(result, null, 2))
+      setDebugInfo(JSON.stringify(result, null, 2))
+
+      alert('Check console and debug panel for Calendar Agent response')
+    } catch (error) {
+      console.error('Calendar test failed:', error)
+    } finally {
+      setPreviewLoading(false)
+    }
   }
 
   return (
@@ -964,6 +989,24 @@ IMPORTANT: Please retrieve ALL calendar events for ${dateFormatted}. Filter to s
                       )}
                     </Button>
                     <Button
+                      onClick={handleTestCalendar}
+                      disabled={previewLoading}
+                      className="w-full"
+                      variant="secondary"
+                    >
+                      {previewLoading ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Testing...
+                        </>
+                      ) : (
+                        <>
+                          <Calendar className="mr-2 h-4 w-4" />
+                          Test Calendar Agent
+                        </>
+                      )}
+                    </Button>
+                    <Button
                       onClick={handleSaveConfig}
                       disabled={loading}
                       className="w-full"
@@ -1037,6 +1080,26 @@ IMPORTANT: Please retrieve ALL calendar events for ${dateFormatted}. Filter to s
           {/* Meeting Preview */}
           <TabsContent value="preview" className="mt-6">
             <div className="space-y-6">
+              {/* Debug Panel */}
+              {debugInfo && (
+                <Card className="border-orange-300 bg-orange-50">
+                  <CardHeader>
+                    <CardTitle className="text-sm flex items-center gap-2">
+                      <Settings className="h-4 w-4" />
+                      Debug Information
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <details className="cursor-pointer">
+                      <summary className="text-sm font-medium mb-2">Click to view raw agent response</summary>
+                      <pre className="text-xs bg-white p-4 rounded border overflow-auto max-h-96">
+                        {debugInfo}
+                      </pre>
+                    </details>
+                  </CardContent>
+                </Card>
+              )}
+
               <Card>
                 <CardHeader>
                   <div className="flex items-center justify-between">
