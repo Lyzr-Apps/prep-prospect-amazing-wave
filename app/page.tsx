@@ -207,6 +207,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState('config')
   const [loading, setLoading] = useState(false)
   const [previewLoading, setPreviewLoading] = useState(false)
+  const [linkedInLoading, setLinkedInLoading] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   // Configuration state with persistence
@@ -281,6 +282,62 @@ export default function Home() {
       if (fileInputRef.current) {
         fileInputRef.current.value = ''
       }
+    }
+  }
+
+  // Fetch previous companies from LinkedIn profile
+  const handleFetchLinkedInData = async () => {
+    if (!config.linkedInUrl) {
+      console.warn('Please enter your LinkedIn profile URL first')
+      return
+    }
+
+    setLinkedInLoading(true)
+    try {
+      const message = `Research this LinkedIn profile and extract the previous companies this person has worked at: ${config.linkedInUrl}
+
+Please return a list of previous company names (not including current company) as a comma-separated string.`
+
+      const result = await callAIAgent(message, AGENTS.linkedin)
+
+      console.log('LinkedIn agent response:', result)
+
+      if (result.success && result.response.status === 'success') {
+        const linkedInData = result.response.result
+
+        // Try to extract previous companies from the response
+        let previousCompanies = ''
+
+        // Check if there's a linkedin_profiles array with previous_companies
+        if (linkedInData.linkedin_profiles?.[0]?.previous_companies) {
+          const companies = linkedInData.linkedin_profiles[0].previous_companies
+          previousCompanies = Array.isArray(companies) ? companies.join(', ') : companies
+        }
+        // Check for a direct previous_companies field
+        else if (linkedInData.previous_companies) {
+          previousCompanies = Array.isArray(linkedInData.previous_companies)
+            ? linkedInData.previous_companies.join(', ')
+            : linkedInData.previous_companies
+        }
+        // Check for text response
+        else if (linkedInData.text || linkedInData.response) {
+          previousCompanies = linkedInData.text || linkedInData.response
+        }
+
+        if (previousCompanies) {
+          setConfig(prev => ({ ...prev, previousCompanies }))
+          console.log('Previous companies updated:', previousCompanies)
+        } else {
+          console.warn('Could not extract previous companies from LinkedIn profile')
+          console.warn('Response structure:', linkedInData)
+        }
+      } else {
+        console.error('LinkedIn agent failed:', result.response.message)
+      }
+    } catch (error) {
+      console.error('Failed to fetch LinkedIn data:', error)
+    } finally {
+      setLinkedInLoading(false)
     }
   }
 
@@ -692,16 +749,36 @@ Please retrieve all calendar events for ${todayFormatted} and provide detailed r
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="previousCompanies">Previous Companies</Label>
-                      <Input
-                        id="previousCompanies"
-                        placeholder="Company A, Company B, Company C"
-                        value={config.previousCompanies}
-                        onChange={(e) =>
-                          setConfig(prev => ({ ...prev, previousCompanies: e.target.value }))
-                        }
-                      />
+                      <div className="flex gap-2">
+                        <Input
+                          id="previousCompanies"
+                          placeholder="Company A, Company B, Company C"
+                          value={config.previousCompanies}
+                          onChange={(e) =>
+                            setConfig(prev => ({ ...prev, previousCompanies: e.target.value }))
+                          }
+                          className="flex-1"
+                        />
+                        <Button
+                          onClick={handleFetchLinkedInData}
+                          disabled={linkedInLoading || !config.linkedInUrl}
+                          variant="outline"
+                          size="default"
+                          className="whitespace-nowrap"
+                        >
+                          {linkedInLoading ? (
+                            <>
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                            </>
+                          ) : (
+                            <>
+                              <RefreshCw className="h-4 w-4" />
+                            </>
+                          )}
+                        </Button>
+                      </div>
                       <p className="text-xs text-slate-500">
-                        Used for finding overlapping employment history
+                        Used for finding overlapping employment history. Click the refresh button to auto-fill from LinkedIn.
                       </p>
                     </div>
                     <div className="space-y-2">
