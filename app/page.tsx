@@ -345,27 +345,27 @@ Please return a list of previous company names (not including current company) a
   const handleGeneratePreview = async () => {
     setPreviewLoading(true)
     try {
-      // Get today's date in a clear format
-      const today = new Date()
-      const todayFormatted = today.toISOString().split('T')[0] // YYYY-MM-DD
-      const todayReadable = today.toLocaleDateString('en-US', {
+      // Use the selected date from config
+      const selectedDate = new Date(config.selectedDate)
+      const dateFormatted = config.selectedDate // YYYY-MM-DD
+      const dateReadable = selectedDate.toLocaleDateString('en-US', {
         weekday: 'long',
         year: 'numeric',
         month: 'long',
         day: 'numeric'
       })
 
-      // Build the message for the coordinator
-      const message = `Generate a day prep preview for today (${todayReadable}, ${todayFormatted}) with the following settings:
+      // Build the message for the coordinator with explicit external participant filtering
+      const message = `Generate a day prep preview for ${dateReadable} (${dateFormatted}) with the following settings:
 
-Company domains to filter: ${config.companyDomains}
+Company domains to filter OUT (these are internal): ${config.companyDomains}
 Email recipient: ${config.emailRecipient || 'Not specified'}
 LinkedIn URL: ${config.linkedInUrl || 'Not specified'}
 Previous companies: ${config.previousCompanies || 'Not specified'}
 Hometown: ${config.hometown || 'Not specified'}
 Research preferences: Apollo=${config.enableApollo}, LinkedIn=${config.enableLinkedIn}, News=${config.enableNews}, Sports=${config.enableSports}, Connections=${config.enableConnections}
 
-Please retrieve all calendar events for ${todayFormatted} and provide detailed research on external participants.`
+IMPORTANT: Please retrieve ALL calendar events for ${dateFormatted}. Filter to show ONLY meetings that have external participants (participants whose email domains do NOT match: ${config.companyDomains}). For each meeting with external participants, provide detailed research on those external participants only.`
 
       // Call the coordinator agent
       const result = await callAIAgent(message, AGENTS.coordinator)
@@ -930,6 +930,21 @@ Please retrieve all calendar events for ${todayFormatted} and provide detailed r
                     <CardTitle>Actions</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
+                    <div className="space-y-2">
+                      <Label htmlFor="selectedDate">Select Date</Label>
+                      <Input
+                        id="selectedDate"
+                        type="date"
+                        value={config.selectedDate}
+                        onChange={(e) =>
+                          setConfig(prev => ({ ...prev, selectedDate: e.target.value }))
+                        }
+                      />
+                      <p className="text-xs text-slate-500">
+                        Choose a specific date to run the planner
+                      </p>
+                    </div>
+
                     <Button
                       onClick={handleGeneratePreview}
                       disabled={previewLoading}
@@ -1026,7 +1041,14 @@ Please retrieve all calendar events for ${todayFormatted} and provide detailed r
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div>
-                      <CardTitle>Today's Meetings</CardTitle>
+                      <CardTitle>
+                        Meetings for {new Date(config.selectedDate).toLocaleDateString('en-US', {
+                          weekday: 'short',
+                          month: 'short',
+                          day: 'numeric',
+                          year: 'numeric'
+                        })}
+                      </CardTitle>
                       <CardDescription>
                         {meetings.length} meeting{meetings.length !== 1 ? 's' : ''} with external participants
                       </CardDescription>
@@ -1053,7 +1075,7 @@ Please retrieve all calendar events for ${todayFormatted} and provide detailed r
                         No meetings found
                       </h3>
                       <p className="text-slate-600 mb-4">
-                        Click "Generate Preview" to fetch today's meetings
+                        Click "Generate Preview" to fetch meetings for the selected date
                       </p>
                     </div>
                   ) : (

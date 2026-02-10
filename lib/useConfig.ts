@@ -16,6 +16,7 @@ export interface DayPlannerConfig {
   enableNews: boolean
   enableSports: boolean
   enableConnections: boolean
+  selectedDate: string
 }
 
 const DEFAULT_CONFIG: DayPlannerConfig = {
@@ -32,6 +33,7 @@ const DEFAULT_CONFIG: DayPlannerConfig = {
   enableNews: true,
   enableSports: true,
   enableConnections: true,
+  selectedDate: new Date().toISOString().split('T')[0],
 }
 
 const CONFIG_STORAGE_KEY = 'day-planner-config'
